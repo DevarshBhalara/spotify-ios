@@ -8,6 +8,8 @@
 import UIKit
 import Kingfisher
 import MotionToastView
+import AVFoundation
+import UserNotifications
 
 class ViewSongVC: UIViewController, Storyboarded {
     
@@ -21,6 +23,7 @@ class ViewSongVC: UIViewController, Storyboarded {
     @IBOutlet private weak var btnLike: UIButton!
     @IBOutlet private weak var btnSuffle: UIButton!
     @IBOutlet private weak var lblArtistName: UILabel!
+    @IBOutlet private weak var btnPlayPause: UIButton!
     @IBOutlet private weak var lblSongName: UILabel!
     
     // MARK: - variables
@@ -29,8 +32,8 @@ class ViewSongVC: UIViewController, Storyboarded {
     var currentSong: Int?
     var trackId: String?
     var viewModel = ViewSongViewModel()
-    var albumSongs: DisplaySong = DisplaySong(type: .album, data: [])
     var currentTrack: Track?
+    let player: AVPlayer? = (UIApplication.shared.connectedScenes.first?.delegate as? SceneDelegate)?.player
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,10 +42,11 @@ class ViewSongVC: UIViewController, Storyboarded {
     }
     
     override open var shouldAutorotate: Bool {
-          return false
+        return false
     }
     
     private func setUpUI() {
+        scheduleLocalNotification()
         if !(trackId?.isEmpty ?? true), let trackId = trackId {
             viewModel.getTrack(trackId: trackId)
         } else {
@@ -59,7 +63,25 @@ class ViewSongVC: UIViewController, Storyboarded {
     }
     
     private func setDataToUI() {
+        btnPlayPause.isSelected = true
         if let songs = songs, let currentSong = currentSong, let imageUrl = songs.data?[currentSong].image {
+            
+            if let player = player, songs.data?[currentSong].previewURL != "", let url = URL(string: songs.data?[currentSong].previewURL ?? "") {
+                player.replaceCurrentItem(with: AVPlayerItem(url: url))
+                player.play()
+            } else {
+                DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + 2) { [weak self] in
+                    let image = UIImage(systemName: "multiply")?.withTintColor(.white).withRenderingMode(.alwaysOriginal)
+                    self?.MotionToast_Customisation(header: "", message: "Sorry, preview isn't availabel",
+                                                    headerColor: UIColor.blue,
+                                                    messageColor: UIColor(red: 239.0, green: 239.0, blue: 239.0, alpha: 0.7),
+                                                    primary_color: UIColor(named: "DarkGreen") ?? UIColor.blue,
+                                                    secondary_color: UIColor(red: 0.0, green: 0.0, blue: 0.0, alpha: 0.0), icon_image: image!,
+                                                    duration: .short, toastStyle: .style_vibrant,
+                                                    toastGravity: .bottom, toastCornerRadius: 8, pulseEffect: false)
+                }
+            }
+            
             imgThumbnail.layer.cornerRadius = 20
             imgThumbnail.kf.setImage(with: URL(string: imageUrl))
             
@@ -113,7 +135,7 @@ class ViewSongVC: UIViewController, Storyboarded {
         }
         
         viewModel.reloadData.bind { [weak self] in
-
+            
             self?.btnLike.isSelected.toggle()
             if let isLiked = self?.btnLike.isSelected {
                 let image = (UIImage(systemName: "checkmark") ?? UIImage(systemName: "trash"))?                   .withTintColor(.white).withRenderingMode(.alwaysOriginal)
@@ -155,6 +177,11 @@ class ViewSongVC: UIViewController, Storyboarded {
     
     @IBAction func btnPausePlay(_ sender: UIButton) {
         sender.isSelected = !sender.isSelected
+        if sender.isSelected {
+            player?.play()
+        } else {
+            player?.pause()
+        }
     }
     
     @IBAction func btnLike(_ sender: UIButton) {
@@ -188,6 +215,32 @@ class ViewSongVC: UIViewController, Storyboarded {
             sender.tintColor = UIColor(named: "AccentColor")
         } else {
             sender.tintColor = UIColor.white
+        }
+    }
+    
+    func scheduleLocalNotification() {
+        let center = UNUserNotificationCenter.current()
+        
+        // Define the notification content
+        let content = UNMutableNotificationContent()
+        content.title = "Hello!"
+        content.body = "This is a local notification in iOS Swift."
+        content.sound = .default
+        content.badge = 1 // Set to 0 to clear the badge count
+        
+        // Define the trigger (when to show the notification)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false) // Show the notification after 5 seconds
+        
+        // Create the notification request
+        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
+        
+        // Add the notification request to the notification center
+        center.add(request) { (error) in
+            if let error = error {
+                print("Error scheduling notification: \(error.localizedDescription)")
+            } else {
+                print("Notification scheduled successfully.")
+            }
         }
     }
     

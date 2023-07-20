@@ -73,7 +73,7 @@ class ArtistProfileVC: UIViewController, Storyboarded {
                 
                 let songData = topTracks?.tracks?.map({ item in
                     let artists = item.album?.artists?.compactMap { $0.name }.joined(separator: ", ")
-                    return DisplaySongData(songName: item.name, artistsName: artists, image: item.album?.images?.first?.url, id: item.id, songDuration: item.durationMs)
+                    return DisplaySongData(songName: item.name, artistsName: artists, image: item.album?.images?.first?.url, id: item.id, songDuration: item.durationMs, previewURL: item.previewUrl ?? "")
                 }) ?? []
                 self.songs.type = .artists
                 self.songs.data = songData as? [DisplaySongData]

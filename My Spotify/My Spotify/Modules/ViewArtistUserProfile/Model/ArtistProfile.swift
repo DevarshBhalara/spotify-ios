@@ -28,6 +28,7 @@ struct ArtistTopTracksData: Codable {
     let durationMs: Int?
     let id: String?
     let name: String?
+    let previewUrl: String?
 }
 
 struct RelatedArtists: Codable {

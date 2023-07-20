@@ -32,6 +32,7 @@
 		2364FFAE2A5D3AA300E5025C /* ViewSongViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364FFAD2A5D3AA300E5025C /* ViewSongViewModel.swift */; };
 		2364FFB12A5D41F500E5025C /* ViewSongCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364FFB02A5D41F500E5025C /* ViewSongCoordinator.swift */; };
 		2364FFB32A5D5E6B00E5025C /* TimeInterval+extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2364FFB22A5D5E6B00E5025C /* TimeInterval+extension.swift */; };
+		236622612A70EC4C00D6AC92 /* Out of Time - The Weeknd_320(MyMp3Song).mp3 in Resources */ = {isa = PBXBuildFile; fileRef = 236622602A70EC4C00D6AC92 /* Out of Time - The Weeknd_320(MyMp3Song).mp3 */; };
 		23846C032A5BED2E00DB5E41 /* UserArtistProfile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 23846C022A5BED2E00DB5E41 /* UserArtistProfile.storyboard */; };
 		23846C072A5BEDEB00DB5E41 /* ArtistProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23846C062A5BEDEB00DB5E41 /* ArtistProfileVC.swift */; };
 		2395AF2E2A5434870003B93B /* APIManager+ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2395AF2D2A5434870003B93B /* APIManager+ErrorHandler.swift */; };
@@ -152,6 +153,8 @@
 		2364FFAD2A5D3AA300E5025C /* ViewSongViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSongViewModel.swift; sourceTree = "<group>"; };
 		2364FFB02A5D41F500E5025C /* ViewSongCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewSongCoordinator.swift; sourceTree = "<group>"; };
 		2364FFB22A5D5E6B00E5025C /* TimeInterval+extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TimeInterval+extension.swift"; sourceTree = "<group>"; };
+		236622602A70EC4C00D6AC92 /* Out of Time - The Weeknd_320(MyMp3Song).mp3 */ = {isa = PBXFileReference; lastKnownFileType = audio.mp3; path = "Out of Time - The Weeknd_320(MyMp3Song).mp3"; sourceTree = "<group>"; };
+		236622622A71172000D6AC92 /* My Spotify.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "My Spotify.entitlements"; sourceTree = "<group>"; };
 		23846C022A5BED2E00DB5E41 /* UserArtistProfile.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = UserArtistProfile.storyboard; sourceTree = "<group>"; };
 		23846C062A5BEDEB00DB5E41 /* ArtistProfileVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistProfileVC.swift; sourceTree = "<group>"; };
 		2395AF2D2A5434870003B93B /* APIManager+ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIManager+ErrorHandler.swift"; sourceTree = "<group>"; };
@@ -708,6 +711,8 @@
 		E8B375FE2A53F6BE006107FD /* My Spotify */ = {
 			isa = PBXGroup;
 			children = (
+				236622622A71172000D6AC92 /* My Spotify.entitlements */,
+				236622602A70EC4C00D6AC92 /* Out of Time - The Weeknd_320(MyMp3Song).mp3 */,
 				E8C38E4A2A57CF19004CE02F /* Models */,
 				E84F68402A55936400430D8A /* Helpers */,
 				E8D6D4D02A5537AA00D2D965 /* Utils */,
@@ -1026,6 +1031,7 @@
 				2364FFA82A5D2EB800E5025C /* ViewSong.storyboard in Resources */,
 				23AFB5622A56DB59005E03CF /* LibraryArtistsCell.xib in Resources */,
 				23AFB54A2A56B8E1005E03CF /* UserLibrary.storyboard in Resources */,
+				236622612A70EC4C00D6AC92 /* Out of Time - The Weeknd_320(MyMp3Song).mp3 in Resources */,
 				234740B72A5ED21B00A25759 /* ViewPodcastProfile.storyboard in Resources */,
 				23E5B3212A581B270090AD91 /* AlbumSongCell.xib in Resources */,
 				E8C38E332A56B745004CE02F /* Search.storyboard in Resources */,
@@ -1336,6 +1342,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "My Spotify/My Spotify.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1365,6 +1372,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "My Spotify/My Spotify.entitlements";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;

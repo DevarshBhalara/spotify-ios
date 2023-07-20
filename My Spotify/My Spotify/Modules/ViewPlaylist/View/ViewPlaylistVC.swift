@@ -80,6 +80,7 @@ class ViewPlaylistVC: UIViewController, Storyboarded, AdditionalInfoAlbum {
             if let sSelf = self, let songs = songs {
                 sSelf.songs = songs
                 sSelf.coordinator?.songs = sSelf.songs
+                print(sSelf.songs.data)
                 sSelf.tblSongs.reloadData()
                 sSelf.aiLoading.stopAnimating()
             }
